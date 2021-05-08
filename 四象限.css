@@ -1,0 +1,195 @@
+/* 参考： https://discuss.logseq.com/t/css-template-eisenhower-matrix/526/2 */
+/* 以及： https://gist.github.com/madawei2699/61cf9601a443df21a9fabb282723936c */
+/* WIP css eisenhower matrix by cannibalox v202100306 */
+/* works best with the `v-eisenhower` template        */
+/* activate with:  `/template v-eisenhower		      */
+/* or tag a block with `#.v-eisenhower-matrix`        */
+/* define vars */
+[data-refs-self*="eisenhower-matrix"] {
+    --eisen-caption-color: #fff;
+    --eisen-caption-bg: #0000;
+    --eisen-scrollbar-width: 2px;
+    --eisen-scrollbar-thumb: #3d39399e;
+    --eisen-scrollbar-track: #0000;
+    --eisen-outercaption-color: #979797b8;
+    --eisen-todo-bgcolor: #4bad00a8;
+    --eisen-decide-bgcolor: #0067beb8;
+    --eisen-delegate-bgcolor: #bf8300c7;
+    --eisen-eliminate-bgcolor: #9c003ecc;
+    --eisen-bullet-color: #282a37;
+    --eisen-clover-borderstyle: 1px solid grey;
+    /*eg: 3px solid white */
+    font-size: 14px;
+}
+
+/* optionnal : add captions around the diagram */
+div[data-refs-self*="eisenhower-matrix"]>.block-children:before {
+    content: "↑ 重要";
+    position: absolute;
+    color: var(--eisen-outercaption-color);
+    font-size: 12px;
+    left: 44%;
+    top: 0.5rem;
+}
+
+div[data-refs-self*="eisenhower-matrix"]>.block-children:after {
+    content: "紧急 ←";
+    position: absolute;
+    color: var(--eisen-outercaption-color);
+    font-size: 12px;
+    left: -1rem;
+    top: 50%;
+}
+
+div[data-refs-self*="eisenhower-matrix"]:before {
+    content: "↓ 不重要";
+    position: absolute;
+    color: var(--eisen-outercaption-color);
+    font-size: 12px;
+    left: 43%;
+    bottom: -0.5rem;
+}
+
+div[data-refs-self*="eisenhower-matrix"]:after {
+    content: "→ 不紧急";
+    position: absolute;
+    color: var(--eisen-outercaption-color);
+    font-size: 12px;
+    right: -2rem;
+    top: 50%;
+}
+
+/* blocks / col */
+div[data-refs-self*="eisenhower-matrix"]>.block-children>div.ls-block {
+    display: inline-block;
+    width: 46%;
+    overflow: hidden;
+    margin: 5px;
+    height: 20rem;
+}
+
+div[data-refs-self*="eisenhower-matrix"]>.block-children>.ls-block {
+    border: var(--eisen-clover-borderstyle);
+}
+
+/* div[data-refs-self*="eisenhower-matrix"]>.block-children>.ls-block:nth-last-child(4) {}
+
+div[data-refs-self*="eisenhower-matrix"]>.block-children>.ls-block:nth-last-child(3) {}
+
+div[data-refs-self*="eisenhower-matrix"]>.block-children>.ls-block:nth-last-child(2) {}
+
+div[data-refs-self*="eisenhower-matrix"]>.block-children>.ls-block:nth-last-child(1) {} */
+
+/*background-color: var(--eisen-eliminate-bgcolor);*/
+
+/* clover contents */
+div[data-refs-self*="eisenhower-matrix"]>.block-children>.ls-block>.block-children {
+    overflow: auto;
+    height: 18rem;
+}
+
+div[data-refs-self*="eisenhower-matrix"]>.block-children>.ls-block>.block-children .bullet {
+    background-color: var(--eisen-bullet-color) !important;
+}
+
+/* scrollbar for each block */
+div[data-refs-self*="eisenhower-matrix"]>.block-children>.ls-block>.block-children::-webkit-scrollbar {
+    width: var(--eisen-scrollbar-width);
+}
+
+div[data-refs-self*="eisenhower-matrix"]>.block-children>.ls-block>.block-children::-webkit-scrollbar-thumb {
+    background-color: var(--eisen-scrollbar-thumb);
+    border-radius: 0px;
+}
+
+div[data-refs-self*="eisenhower-matrix"]>.block-children>.ls-block>.block-children::-webkit-scrollbar-track {
+    background: var(--eisen-scrollbar-track);
+}
+
+/* block titles */
+div[data-refs-self*="eisenhower-matrix"]>.block-children>div.ls-block>.flex-1.flex-row>div>.block-content {
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-align: center;
+    margin-left: -1rem;
+    margin-top: 4px;
+}
+
+div[data-refs-self*="eisenhower-matrix"]>.block-children>div.ls-block>.flex-1.flex-row>div>.block-content .page-reference {
+    background: var(--eisen-caption-bg);
+    border-radius: 3px;
+}
+
+div[data-refs-self*="eisenhower-matrix"]>.block-children>div.ls-block>.flex-1.flex-row>div>.block-content .page-ref {
+    color: var(--eisen-caption-color);
+}
+
+/* remove bullet of the block title */
+div[data-refs-self*="eisenhower-matrix"]>.block-children>div.ls-block>.flex-1.flex-row>div .bullet {
+    visibility: hidden
+}
+
+/* 隐藏任务的属性，避免看起来太臃肿 */
+div[data-refs-self*="eisenhower-matrix"]>.block-children>div.ls-block>.block-children .blocks-properties {
+    display: none;
+}
+
+/* remove indent line ~ margin-left of table cells */
+div[data-refs-self*="eisenhower-matrix"]>.block-children>.ls-block>.block-children {
+    border: 0;
+    margin: 0px !important;
+}
+
+div[data-refs-self*="eisenhower-matrix"]>.block-children {
+    border: none;
+    margin: 0px 0px 0 30px !important;
+}
+
+div[data-refs-self*="eisenhower-matrix"] .dsl-query>div>div>div.content {
+    display: none;
+}
+
+div[data-refs-self*="eisenhower-matrix"] .block-body>div>div>div.initial {
+    margin-top: -32px;
+    margin-left: -20px;
+    margin-right: 20px;
+}
+
+div[data-refs-self*="eisenhower-matrix"] .block-body>div>div>div.initial>div>div>div {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+div[data-refs-self*="eisenhower-matrix"] .dsl-query>div>div>div.initial>div.content {
+    margin-right: 1rem;
+    margin-left: -1rem !important;
+    margin-top: -1rem !important;
+}
+
+/* =============== END OF EISENHOWER MATRIX =====================*/
+
+/* vismode icon component by cannibalox */
+/* part of the ls-vizmods-suite         */
+a.tag[data-ref*=".v-"]:before {
+    content: "🚩今日目标";
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+}
+
+a.tag[data-ref*=".v-"]:hover:before {
+    padding-right: 0.3rem;
+}
+
+a.tag[data-ref*=".v-"]:hover {
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+}
+
+a.tag[data-ref*=".v-"] {
+    font-size: 0px;
+    font-family: iosevka, fira code, consolas, source code pro;
+    color: #88e165;
+    background-color: #1a2d23;
+    /*border: 1px solid #a1c65d; border-radius: 3px;*/
+    padding: 0 2px;
+}
